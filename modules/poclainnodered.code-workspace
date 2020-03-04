@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "/Users/Pascal/Documents/Prestation/Poclain/Azure IoT/Docker/PoclainNodeRed"
+		}
+	],
+	"settings": {
+		"azure-iot-edge.defaultPlatform": {
+			"platform": "arm32v7",
+			"alias": null
+		}
+	}
+}

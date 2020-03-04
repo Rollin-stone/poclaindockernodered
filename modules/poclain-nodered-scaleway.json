@@ -1,0 +1,598 @@
+[
+    {
+        "id": "a30356a2.f0b688",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "c82624f2.213d4",
+        "type": "tab",
+        "label": "Poclain",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "6bcbaa7d.003f5c",
+        "type": "tab",
+        "label": "Envoi Scaleway",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "8328e047.53c238",
+        "type": "moduleclient",
+        "z": ""
+    },
+    {
+        "id": "4768bea2.64e14",
+        "type": "moduleclient",
+        "z": ""
+    },
+    {
+        "id": "e6c48e76.b9af58",
+        "type": "mqtt-broker",
+        "z": "",
+        "name": "broker local docker",
+        "broker": "172.17.0.1",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": true,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": ""
+    },
+    {
+        "id": "71fb46c8.a8df28",
+        "type": "mqtt-broker",
+        "z": "",
+        "name": "",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": true,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closeRetain": "false",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": ""
+    },
+    {
+        "id": "d0e29d0.15ceae",
+        "type": "mqtt-broker",
+        "z": "",
+        "name": "FROMKONTRON",
+        "broker": "172.17.0.1",
+        "port": "1883",
+        "clientid": "test",
+        "usetls": false,
+        "compatmode": true,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": ""
+    },
+    {
+        "id": "3e5a91b5.a8ed6e",
+        "type": "moduleclient",
+        "z": ""
+    },
+    {
+        "id": "7f3a1b2d.eb0e5c",
+        "type": "tls-config",
+        "z": "",
+        "name": "",
+        "cert": "/usr/src/node-red/cert/CA-BCM2835-47528878",
+        "key": "/usr/src/node-red/cert/Cleprive-Scaleway-BCM2835-47528878",
+        "ca": "/usr/src/node-red/cert/CA-ROOT-Scaleway ",
+        "certname": "",
+        "keyname": "",
+        "caname": "",
+        "servername": "",
+        "verifyservercert": true
+    },
+    {
+        "id": "1a3ce0b6.c16827",
+        "type": "mqtt-broker",
+        "z": "",
+        "name": "scaleway",
+        "broker": "mqtts://iot.fr-par.scw.cloud",
+        "port": "1883",
+        "tls": "7f3a1b2d.eb0e5c",
+        "clientid": "8a5cc263-89f6-41ac-b992-b81714360ca0",
+        "usetls": true,
+        "compatmode": false,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": ""
+    },
+    {
+        "id": "9509fa9c.6adbb",
+        "type": "function",
+        "z": "a30356a2.f0b688",
+        "name": "output msg",
+        "func": "var newMsg = { payload:\n    \"{ \\\"random\\\":\" + Math.random() + \",\" +\n    \"\\\"deviceId\\\": \\\"device-01\\\",\" +\n    \"\\\"timestamp\\\":\" + msg.payload + \"}\"\n}\nreturn newMsg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 889,
+        "y": 270,
+        "wires": [
+            [
+                "517d5508.e36f64"
+            ]
+        ]
+    },
+    {
+        "id": "61bcc973.da80b8",
+        "type": "moduletwin",
+        "z": "a30356a2.f0b688",
+        "client": "8328e047.53c238",
+        "x": 446,
+        "y": 144,
+        "wires": [
+            [
+                "68c84430.a68e24"
+            ]
+        ]
+    },
+    {
+        "id": "68c84430.a68e24",
+        "type": "debug",
+        "z": "a30356a2.f0b688",
+        "name": "twin msg",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 669,
+        "y": 90,
+        "wires": []
+    },
+    {
+        "id": "1a8360d4.441837",
+        "type": "inject",
+        "z": "a30356a2.f0b688",
+        "name": "running",
+        "topic": "",
+        "payload": "running",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "0.1",
+        "x": 85,
+        "y": 108,
+        "wires": [
+            [
+                "ca9415c2.4f5518"
+            ]
+        ]
+    },
+    {
+        "id": "ca9415c2.4f5518",
+        "type": "function",
+        "z": "a30356a2.f0b688",
+        "name": "reported msg",
+        "func": "var reported = { payload:\n\"{\\\"moduleStatus\\\": \\\"\" + msg.payload + \"\\\"}\" }\nreturn reported;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 245,
+        "y": 188,
+        "wires": [
+            [
+                "61bcc973.da80b8"
+            ]
+        ]
+    },
+    {
+        "id": "b0c5ddd6.4fda68",
+        "type": "inject",
+        "z": "a30356a2.f0b688",
+        "name": "stopped",
+        "topic": "",
+        "payload": "stopped",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "0.1",
+        "x": 85,
+        "y": 248,
+        "wires": [
+            [
+                "ca9415c2.4f5518"
+            ]
+        ]
+    },
+    {
+        "id": "517d5508.e36f64",
+        "type": "moduleoutput",
+        "z": "a30356a2.f0b688",
+        "client": "8328e047.53c238",
+        "output": "output1",
+        "x": 1154,
+        "y": 318,
+        "wires": []
+    },
+    {
+        "id": "f72f6c56.b53ce",
+        "type": "inject",
+        "z": "a30356a2.f0b688",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "10",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "x": 689,
+        "y": 330,
+        "wires": [
+            [
+                "9509fa9c.6adbb"
+            ]
+        ]
+    },
+    {
+        "id": "bf7fb76d.f46f8",
+        "type": "modulemethod",
+        "z": "a30356a2.f0b688",
+        "client": "8328e047.53c238",
+        "method": "setValue",
+        "x": 874,
+        "y": 678,
+        "wires": [
+            [
+                "4c5b0b35.54d594",
+                "db6c3271.064318"
+            ]
+        ]
+    },
+    {
+        "id": "27b34d8b.e352f2",
+        "type": "moduleinput",
+        "z": "a30356a2.f0b688",
+        "client": "8328e047.53c238",
+        "input": "input1",
+        "x": 142,
+        "y": 559,
+        "wires": [
+            [
+                "91f46714.f05ff",
+                "8448ea3f.ccd41"
+            ]
+        ]
+    },
+    {
+        "id": "91f46714.f05ff",
+        "type": "debug",
+        "z": "a30356a2.f0b688",
+        "name": "input msg",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 365,
+        "y": 592,
+        "wires": []
+    },
+    {
+        "id": "4c5b0b35.54d594",
+        "type": "debug",
+        "z": "a30356a2.f0b688",
+        "name": "method msg",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 1134,
+        "y": 658,
+        "wires": []
+    },
+    {
+        "id": "db6c3271.064318",
+        "type": "function",
+        "z": "a30356a2.f0b688",
+        "name": "response msg",
+        "func": "var response = { payload:\n\"{\\\"methodpayload\\\": \\\"\" + msg.payload + \"\\\"}\" }\nresponse.payload.timestamp = Date.now()\nresponse.status = 100\nreturn response;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 864,
+        "y": 798,
+        "wires": [
+            [
+                "bf7fb76d.f46f8"
+            ]
+        ]
+    },
+    {
+        "id": "704a662f.d9491",
+        "type": "moduleoutput",
+        "z": "a30356a2.f0b688",
+        "client": "8328e047.53c238",
+        "output": "output2",
+        "x": 629,
+        "y": 518,
+        "wires": []
+    },
+    {
+        "id": "cc6489d4.1608e8",
+        "type": "comment",
+        "z": "a30356a2.f0b688",
+        "name": "Example: Work with module twin",
+        "info": "The Module Twin enables you to interact with the module twin on IoT Hub. The node output will provide the twin desired property changes and the node input will enable you to send reported properties back to the IoT Hub. The message coming from the node output will have the property \"topic: desired\" added to it for selection and identification purposes.",
+        "x": 405,
+        "y": 97,
+        "wires": []
+    },
+    {
+        "id": "35029a53.da328e",
+        "type": "comment",
+        "z": "a30356a2.f0b688",
+        "name": "Example: Simulate module output",
+        "info": "The Module Output enables you to send output to the edgeHub. To send output to another module or to the IoT Hub you have to setup the route to use the output when you created the node. The node input will enable you to send the telemetry message.",
+        "x": 936,
+        "y": 217,
+        "wires": []
+    },
+    {
+        "id": "5a71c2b9.e61a0c",
+        "type": "comment",
+        "z": "a30356a2.f0b688",
+        "name": "Example: Process Direct Method",
+        "info": "The Module Method enables you receive module direct methods. The setup of the module defines which method the node is responding to and what the response is for the method call. The message coming from the node output will have the properties \"topic: method\", \"method: <method name>\" and \"payload: <method payload>\" added to it for selection and identification purposes.\nThe input of the node will have to be used to send a response for the method call. The response (message) wil have to be connected (indirectly) to the message coming from the node output, to ensure a closed loop for the method. When sending a return for the method call on the input, the message property \"status: <your status>\" needs to be set on the message. See the function in the example for details.",
+        "x": 886,
+        "y": 621,
+        "wires": []
+    },
+    {
+        "id": "4be8fc33.de5194",
+        "type": "comment",
+        "z": "a30356a2.f0b688",
+        "name": "Example: Enable module input",
+        "info": "The Module Input enables you to receive input from other modules on your IoT Edge device. To receive input, you have to setup the route to point at the input you specified when you created the node. The node output will provide you with the incoming telemetry message. The message coming from the node output will have the properties \"topic: input\" and \"input: <input name>\" added to it for selection and identification purposes.",
+        "x": 135,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "f5fa0c85.f5513",
+        "type": "comment",
+        "z": "a30356a2.f0b688",
+        "name": "Example: Process message and send to output",
+        "info": "Receive an input message and then use another node-red node to change the message and sen it thorugh to an output node.",
+        "x": 613,
+        "y": 436,
+        "wires": []
+    },
+    {
+        "id": "8448ea3f.ccd41",
+        "type": "change",
+        "z": "a30356a2.f0b688",
+        "name": "adjust msg",
+        "rules": [
+            {
+                "t": "delete",
+                "p": "payload.timeCreated",
+                "pt": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload.timestamp",
+                "pt": "msg",
+                "to": "",
+                "tot": "date"
+            },
+            {
+                "t": "set",
+                "p": "payload.deviceId",
+                "pt": "msg",
+                "to": "device-02",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 379,
+        "y": 488,
+        "wires": [
+            [
+                "704a662f.d9491"
+            ]
+        ]
+    },
+    {
+        "id": "5c6eabd0.372fec",
+        "type": "mqtt in",
+        "z": "c82624f2.213d4",
+        "name": "Broker local",
+        "topic": "fleet/+/data/values",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "e6c48e76.b9af58",
+        "x": 130,
+        "y": 220,
+        "wires": [
+            [
+                "b1dbcaba.19cd88",
+                "ade077a8.3efbf8"
+            ]
+        ]
+    },
+    {
+        "id": "475c326d.9e0f2c",
+        "type": "function",
+        "z": "c82624f2.213d4",
+        "name": "Formatage message Poclain",
+        "func": "var donnees= {\n  \"deviceId\": msg.payload.deviceID,\n  \"version\":\"1.0\",\n  \"FuelConsumption\": msg.payload.fuelConsumption,\n  \"engineWaterTemp\": msg.payload.engineWaterTemp,\n  \"engineRPM\":msg.payload.engineRPM,\n  \"location\": {\n        \"lon\": msg.payload.longitude,\n        \"lat\": msg.payload.latitude,\n        \"alt\": msg.payload.Altitude,\n        },\n            \n  \"timestamp\" : msg.payload.timestamp,\n  \"precision\" : msg.payload.precision,\n}\nvar newMsg = { payload: donnees};\nreturn newMsg;\n\n\n//{\"deviceId\":\"BCM2835-F3EE5693\",\n// \"reverseGear\":0,\n// \"parkBrake\":0,\n// \"serviceBrake\":0,\n// \"startInProgress\":0.00,\n// \"fuelConsumption\":0.00,\n//\"engineWaterTemp\":0.00,\n//\"engineRPM\":0.00,\n//\"frWheelsAvgSpeed\":0.00,\n//\"rrLeftWheelSpeed\":0.00,\n//\"rrRightWheelSpeed\":0.00,\n//\"highPressureA\":0.00,\n//\"highPressureB\":0.00,\n//\"speed\":0.00,\n//\"trackedSats\":2.00,\n//\"Precision\":1.20,\n//\"longitude\":2.7503099,\n//\"latitude\":49.3229889,\n//\"timestamp\":1579859275009,\"precision\":\"ms\"}",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 700,
+        "y": 180,
+        "wires": [
+            [
+                "4078e578.75a96c",
+                "25d15952.05da1e"
+            ]
+        ]
+    },
+    {
+        "id": "4078e578.75a96c",
+        "type": "moduleoutput",
+        "z": "c82624f2.213d4",
+        "client": "4768bea2.64e14",
+        "output": "Ouput",
+        "x": 1060,
+        "y": 190,
+        "wires": []
+    },
+    {
+        "id": "ade077a8.3efbf8",
+        "type": "debug",
+        "z": "c82624f2.213d4",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 930,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "b1dbcaba.19cd88",
+        "type": "json",
+        "z": "c82624f2.213d4",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 430,
+        "y": 200,
+        "wires": [
+            [
+                "475c326d.9e0f2c"
+            ]
+        ]
+    },
+    {
+        "id": "25d15952.05da1e",
+        "type": "debug",
+        "z": "c82624f2.213d4",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 990,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "d15bb615.302d3",
+        "type": "comment",
+        "z": "c82624f2.213d4",
+        "name": "Lecture MQTT local et envoi vers azure",
+        "info": "",
+        "x": 610,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "ac73062d.e957d",
+        "type": "mqtt in",
+        "z": "6bcbaa7d.003f5c",
+        "name": "",
+        "topic": "#",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "e6c48e76.b9af58",
+        "x": 220,
+        "y": 340,
+        "wires": [
+            [
+                "fe4aabd6.edace8",
+                "245d7c3.3531c84"
+            ]
+        ]
+    },
+    {
+        "id": "fe4aabd6.edace8",
+        "type": "mqtt out",
+        "z": "6bcbaa7d.003f5c",
+        "name": "",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "broker": "1a3ce0b6.c16827",
+        "x": 820,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "245d7c3.3531c84",
+        "type": "debug",
+        "z": "6bcbaa7d.003f5c",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 700,
+        "y": 380,
+        "wires": []
+    }
+]

@@ -1,0 +1,219 @@
+[
+    {
+        "id": "75d22348.915fd4",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "695b82c3.a75d64",
+        "type": "mqtt in",
+        "z": "75d22348.915fd4",
+        "name": "Payload",
+        "topic": "/Kontron/TRACe/+/LoRa/+/+/1",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "fd42c1d7.2e0d18",
+        "x": 104.60000610351562,
+        "y": 573.0000152587891,
+        "wires": [
+            [
+                "43e85213.09bb54",
+                "35c2a0c7.672b2"
+            ]
+        ]
+    },
+    {
+        "id": "1558f7fa.71f4f8",
+        "type": "function",
+        "z": "75d22348.915fd4",
+        "name": "Creation Message",
+        "func": "//var test=JSON.stringify(msg.payload);\nvar test=msg.payload;\nvar donnees= {\n  \"deviceId\": \"loraDevice\",\n  \"version\":\"1.0\",\n  \"value\":test\n}\nvar connect= {\n  \"deviceId\": \"loraDevice\",\n  \"key\": \"3uKk6G/TmMqnz1FKlKQKkGAp9c+VhSmpF5xem+uwCTQ=\",\n  \"protocol\": \"amqp\",\n//   \"data\": \"{tem: 25, wind: 20, deviceId:loraDevice}\"\n  \"data\":{ payload: donnees},\n}\n\nvar newMsg = { payload: connect};\nreturn newMsg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 670,
+        "y": 640,
+        "wires": [
+            [
+                "daf5e14e.032348"
+            ]
+        ]
+    },
+    {
+        "id": "de4f415.50140c",
+        "type": "debug",
+        "z": "75d22348.915fd4",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 990,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "f6c0060b.8da488",
+        "type": "json",
+        "z": "75d22348.915fd4",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 410,
+        "y": 700,
+        "wires": [
+            [
+                "1558f7fa.71f4f8"
+            ]
+        ]
+    },
+    {
+        "id": "4e5abbc.39b16c4",
+        "type": "azureiothub",
+        "z": "75d22348.915fd4",
+        "name": "Azure IoT Hub",
+        "protocol": "amqp",
+        "x": 860,
+        "y": 840,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "923ef836.7ce9e",
+        "type": "json",
+        "z": "75d22348.915fd4",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 690,
+        "y": 840,
+        "wires": [
+            [
+                "4e5abbc.39b16c4"
+            ]
+        ]
+    },
+    {
+        "id": "daf5e14e.032348",
+        "type": "change",
+        "z": "75d22348.915fd4",
+        "name": "ajoutheure",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.data.payload.heure",
+                "pt": "msg",
+                "to": "",
+                "tot": "date"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 481.99999237060547,
+        "y": 828.0000009536743,
+        "wires": [
+            [
+                "923ef836.7ce9e",
+                "de4f415.50140c"
+            ]
+        ]
+    },
+    {
+        "id": "43e85213.09bb54",
+        "type": "adeunis-rf",
+        "z": "75d22348.915fd4",
+        "name": "",
+        "x": 470,
+        "y": 580,
+        "wires": [
+            [
+                "91a522c8.8d82c8",
+                "f6c0060b.8da488"
+            ]
+        ]
+    },
+    {
+        "id": "91a522c8.8d82c8",
+        "type": "debug",
+        "z": "75d22348.915fd4",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 670,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "35c2a0c7.672b2",
+        "type": "debug",
+        "z": "75d22348.915fd4",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 250,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "2013b927.2563f6",
+        "type": "inject",
+        "z": "75d22348.915fd4",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 80,
+        "y": 760,
+        "wires": [
+            [
+                "35c2a0c7.672b2"
+            ]
+        ]
+    },
+    {
+        "id": "fd42c1d7.2e0d18",
+        "type": "mqtt-broker",
+        "z": "",
+        "name": "",
+        "broker": "192.168.83.1",
+        "port": "1883",
+        "clientid": "test",
+        "usetls": false,
+        "compatmode": true,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": ""
+    }
+]
