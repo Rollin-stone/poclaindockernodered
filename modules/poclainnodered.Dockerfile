@@ -17,8 +17,6 @@ COPY  modules/Scaleway/Cleprive-Scaleway-BCM2835-47528878 /usr/src/node-red/cert
 RUN npm install node-red-contrib-azure-iot-edge-kpm
 
 
-
-
 # User configuration directory volume
 VOLUME ["/data"]
 EXPOSE 1880
